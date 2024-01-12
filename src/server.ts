@@ -13,10 +13,12 @@ const port = process.env.PORT || 3000;
 
 dbConnect();
 
+app.use(express.json());
+
 app.use("/users", userRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(new createHttpError.NotFound());
+  next(new createHttpError.NotFound("API Doesn't exist"));
 });
 
 app.use(handleError);
